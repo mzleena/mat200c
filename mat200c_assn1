@@ -18,8 +18,8 @@ uniform float u_time;
 // Plot line on Y using value between 0.0-1.0
 	
 	float plot(vec2 st, float pct){
-		return smoothstep( pct-0.02, pct, st.y) -
-				smoothstep( pct, pct+0.02, st.y);
+		return smoothstep( pct-abs(sin(u_time)), pct, st.y) -
+				smoothstep( pct, pct+abs(sin(u_time)), st.y);
 	}
 
 void main() {
@@ -32,9 +32,9 @@ void main() {
 // Plot Line
 	
 	float pct = plot(st,y);
-	color = (abs(sin(u_time))-pct)*color+pct*vec3(0.0,0.0,1.0);   
+	color = (1.0-pct)*color+pct*vec3(1.0,0.0,1.0);   
 
-    gl_FragColor = vec4(color,1.);
+    gl_FragColor = vec4(color,1.0);
 }
 "
 width="800" height="600"> </canvas>	
